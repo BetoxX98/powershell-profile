@@ -1,45 +1,45 @@
-# PowerShell Profile - Utilidades de Desarrollo
+# PowerShell Profile - Development Utilities
 
-Conjunto de funciones PowerShell para agilizar tareas comunes en desarrollo con **.NET, Docker, Yarn y más**. Optimizado para Windows PowerShell 5.1+.
+PowerShell function set to speed up common development tasks with **.NET, Docker, Yarn and more**. Optimized for Windows PowerShell 5.1+.
 
-## 📋 Tabla de Contenidos
+## Table of Contents
 
-- [Instalación](#instalación)
-- [Comandos .NET](#comandos-dotnet)
-- [Comandos ASP.NET Core](#comandos-aspnet-core)
-- [Comandos Docker](#comandos-docker)
-- [Comandos JavaScript/Yarn](#comandos-javascriptyarn)
-- [Uso Rápido](#uso-rápido)
-- [Solución de Problemas](#solución-de-problemas)
+- [Installation](#installation)
+- [.NET Commands](#net-commands)
+- [ASP.NET Core Commands](#aspnet-core-commands)
+- [Docker Commands](#docker-commands)
+- [JavaScript/Yarn Commands](#javascriptyarn-commands)
+- [Quick Usage](#quick-usage)
+- [Troubleshooting](#troubleshooting)
 
 ---
 
-## 🚀 Instalación
+## Installation
 
-### Opción 1: Carga automática en el perfil
+### Option 1: Auto-load in profile
 
-1. Abre PowerShell como administrador
-2. Navega a `Documentos\PowerShell` (o crea la carpeta si no existe)
-3. Copia `ProfileUtils.ps1` a esa ubicación
-4. Edita o crea el archivo `$PROFILE` y agrega:
+1. Open PowerShell as administrator
+2. Navigate to `Documents\PowerShell` (or create the folder if it does not exist)
+3. Copy `ProfileUtils.ps1` to that location
+4. Edit or create the `$PROFILE` file and add:
 
 ```powershell
-# En $PROFILE
+# In $PROFILE
 . "$PSScriptRoot\ProfileUtils.ps1"
 ```
 
-5. Recarga PowerShell o ejecuta:
+5. Reload PowerShell or execute:
 ```powershell
 . $PROFILE
 ```
 
-### Opción 2: Carga manual
+### Option 2: Manual load
 
 ```powershell
-. "C:\ruta\a\ProfileUtils.ps1"
+. "C:\path\to\ProfileUtils.ps1"
 ```
 
-### Verificar instalación
+### Verify installation
 
 ```powershell
 dn-help
@@ -47,240 +47,240 @@ dn-help
 
 ---
 
-## 🔧 Comandos .NET
+## .NET Commands
 
-Todas las utilidades de .NET comienzan con `dn` para un acceso rápido.
+All .NET utilities start with `dn` for quick access.
 
-### Compilación y Limpieza
+### Build and Clean
 
-| Comando | Descripción | Ejemplo |
+| Command | Description | Example |
 |---------|-------------|---------|
-| `dnb` | Build (compilar) | `dnb` o `dnb ./src/MiProyecto` |
-| `dnc` | Clean (limpiar artifacts) | `dnc` |
-| `dnc+` | Eliminar recursivamente bin/obj | `dnc+` |
+| `dnb` | Build (compile) | `dnb` or `dnb ./src/MyProject` |
+| `dnc` | Clean (clean artifacts) | `dnc` |
+| `dnc+` | Delete bin/obj folders recursively | `dnc+` |
 
-**Ejemplo:**
+**Example:**
 ```powershell
-dnb ./src/MiProyecto    # Compila proyecto específico
-dnc+                     # Limpia todas las carpetas bin/obj
+dnb ./src/MyProject    # Compiles specific project
+dnc+                   # Cleans all bin/obj folders
 ```
 
-### Ejecución y Testing
+### Run and Test
 
-| Comando | Descripción | Ejemplo |
+| Command | Description | Example |
 |---------|-------------|---------|
-| `dnr` | Run (ejecutar) | `dnr` o `dnr ./src/MiProyecto` |
-| `dnt` | Test (ejecutar tests) | `dnt` |
-| `dnrs` | Restore (restaurar dependencias) | `dnrs` |
+| `dnr` | Run (execute) | `dnr` or `dnr ./src/MyProject` |
+| `dnt` | Test (run tests) | `dnt` |
+| `dnrs` | Restore (restore dependencies) | `dnrs` |
 
-**Ejemplo:**
+**Example:**
 ```powershell
-dnr ./src/Api              # Ejecuta proyecto específico
-dnt                        # Ejecuta todos los tests
+dnr ./src/Api          # Runs specific project
+dnt                    # Runs all tests
 ```
 
-### Información y Gestión
+### Information and Management
 
-| Comando | Descripción | Ejemplo |
+| Command | Description | Example |
 |---------|-------------|---------|
-| `dnv` | Mostrar versión de .NET | `dnv` |
-| `dn-updt` | Listar paquetes desactualizados | `dn-updt` o `dn-updt ./src/Proyecto` |
-| `dn-purge` | Terminar procesos dotnet | `dn-purge` |
-| `dnf` | Formatear código con CSharpier | `dnf` |
-| `dn-help` | Mostrar esta ayuda | `dn-help` |
+| `dnv` | Show .NET version | `dnv` |
+| `dn-updt` | List outdated packages | `dn-updt` or `dn-updt ./src/Project` |
+| `dn-purge` | Kill dotnet processes | `dn-purge` |
+| `dnf` | Format code with CSharpier | `dnf` |
+| `dn-help` | Show this help | `dn-help` |
 
-**Ejemplo:**
+**Example:**
 ```powershell
-dnv                        # Muestra: .NET 8.0.100
-dn-updt ./src              # Lista paquetes desactualizados
-dn-purge                   # Termina procesos stuck
-dnf                        # Formatea todo el código
+dnv                    # Shows: .NET 8.0.100
+dn-updt ./src          # Lists outdated packages
+dn-purge               # Kills stuck processes
+dnf                    # Formats all code
 ```
 
 ---
 
-## 🌐 Comandos ASP.NET Core
+## ASP.NET Core Commands
 
-Gestión del ambiente de ejecución para proyectos ASP.NET Core.
+Manage the execution environment for ASP.NET Core projects.
 
-| Comando | Descripción |
+| Command | Description |
 |---------|-------------|
-| `asp-set-devEnv` | Configura `ASPNETCORE_ENVIRONMENT = Development` |
-| `asp-set-prodEnv` | Configura `ASPNETCORE_ENVIRONMENT = Production` |
+| `asp-set-devEnv` | Sets `ASPNETCORE_ENVIRONMENT = Development` |
+| `asp-set-prodEnv` | Sets `ASPNETCORE_ENVIRONMENT = Production` |
 
-**Ejemplo:**
+**Example:**
 ```powershell
-asp-set-devEnv             # Ambiente desarrollo (habilita hot reload, etc)
-asp-set-prodEnv            # Ambiente producción
+asp-set-devEnv        # Development environment (enables hot reload, etc)
+asp-set-prodEnv       # Production environment
 ```
 
 ---
 
-## 🐳 Comandos Docker
+## Docker Commands
 
-Control y gestión de contenedores Docker.
+Control and management of Docker containers.
 
 ### docker-purge
 
-Limpia todos los recursos de Docker.
+Cleans all Docker resources.
 
 ```powershell
-docker-purge               # Elimina todo (contenedores, volúmenes, imágenes)
-docker-purge -KeepImages   # Elimina todo EXCEPTO imágenes
+docker-purge           # Removes everything (containers, volumes, images)
+docker-purge -KeepImages   # Removes everything EXCEPT images
 ```
 
-**⚠️ Advertencia:** Este comando elimina TODOS los contenedores y volúmenes. Usa con cuidado en producción.
+**Warning:** This command removes ALL containers and volumes. Use carefully in production.
 
 ---
 
-## 📦 Comandos JavaScript/Yarn
+## JavaScript/Yarn Commands
 
-| Comando | Descripción |
+| Command | Description |
 |---------|-------------|
-| `pws-isyarn` | Instala dependencias y ejecuta `yarn start` |
+| `pws-isyarn` | Installs dependencies and runs `yarn start` |
 
-**Ejemplo:**
+**Example:**
 ```powershell
-pws-isyarn                 # yarn install + yarn start
+pws-isyarn            # yarn install + yarn start
 ```
 
 ---
 
-## 🎯 Uso Rápido
+## Quick Usage
 
-### Flujo típico de desarrollo
+### Typical development flow
 
 ```powershell
-# 1. Limpiar y compilar
+# 1. Clean and build
 dnc+
 dnb
 
-# 2. Verificar paquetes desactualizados
+# 2. Check for outdated packages
 dn-updt
 
-# 3. Ejecutar tests
+# 3. Run tests
 dnt
 
-# 4. Formatear código
+# 4. Format code
 dnf
 
-# 5. Ejecutar la aplicación
+# 5. Run the application
 dnr
 ```
 
-### Workflow de depuración
+### Debug workflow
 
 ```powershell
-# Los procesos dotnet quedan atrapados
-dn-purge                   # Limpia todos los procesos
+# Dotnet processes get stuck
+dn-purge               # Cleans all processes
 
-# Recompila y ejecuta
+# Rebuild and run
 dnb && dnr
 ```
 
-### Gestión de ambientes
+### Environment management
 
 ```powershell
-# Cambiar a desarrollo
+# Switch to development
 asp-set-devEnv
 dnr
 
-# Cambiar a producción
+# Switch to production
 asp-set-prodEnv
 dnb -c Release
 ```
 
 ---
 
-## 🔍 Solución de Problemas
+## Troubleshooting
 
-### Las funciones no están disponibles
+### Functions are not available
 
-**Problema:** `dn-help no es reconocido`
+**Problem:** `dn-help is not recognized`
 
-**Solución:**
-1. Verifica que `ProfileUtils.ps1` esté en `Documentos\PowerShell`
-2. Confirma que el archivo está cargado en `$PROFILE`
-3. Ejecuta: `. $PROFILE`
-4. Comprueba: `Get-Command dn-help`
+**Solution:**
+1. Verify that `ProfileUtils.ps1` is in `Documents\PowerShell`
+2. Confirm that the file is loaded in `$PROFILE`
+3. Execute: `. $PROFILE`
+4. Check: `Get-Command dn-help`
 
-### Los comandos dotnet no funcionan
+### Dotnet commands do not work
 
-**Problema:** `dotnet: command not found`
+**Problem:** `dotnet: command not found`
 
-**Solución:**
-1. Instala .NET SDK desde https://dotnet.microsoft.com/download
-2. Reinicia PowerShell
-3. Verifica: `dnv`
+**Solution:**
+1. Install .NET SDK from https://dotnet.microsoft.com/download
+2. Restart PowerShell
+3. Verify: `dnv`
 
-### Docker-purge da error de permisos
+### Docker-purge gives permission error
 
-**Problema:** `Error response from daemon: permission denied`
+**Problem:** `Error response from daemon: permission denied`
 
-**Solución:**
-1. Ejecuta PowerShell como administrador
-2. Asegúrate que Docker Desktop esté corriendo
-3. Intenta nuevamente: `docker-purge`
+**Solution:**
+1. Run PowerShell as administrator
+2. Make sure Docker Desktop is running
+3. Try again: `docker-purge`
 
-### CSharpier no disponible
+### CSharpier not available
 
-**Problema:** `dnf` da error
+**Problem:** `dnf` gives error
 
-**Solución:**
-1. Instala CSharpier: `dotnet tool install -g csharpier`
-2. Intenta nuevamente: `dnf`
+**Solution:**
+1. Install CSharpier: `dotnet tool install -g csharpier`
+2. Try again: `dnf`
 
 ---
 
-## 📝 Estructura del Archivo
+## File Structure
 
-El archivo está organizado en secciones claras:
+The file is organized in clear sections:
 
 ```
 ProfileUtils.ps1
-├── Importar Utilidades Externas
-├── DOTNET - Funciones de Ayuda
-├── DOTNET - Build y Clean
-├── DOTNET - Ejecutar y Testear
-├── DOTNET - Información y Gestión
-├── ASP.NET CORE - Configuración de Ambiente
-├── YARN - Gestión de dependencias
-├── DOCKER - Gestión de contenedores
-└── Exportar Funciones
+├── Import External Utilities
+├── DOTNET - Help functions
+├── DOTNET - Build and Clean
+├── DOTNET - Run and Test
+├── DOTNET - Information and Management
+├── ASP.NET CORE - Environment Configuration
+├── YARN - JavaScript dependency management
+├── DOCKER - Container management
+└── Export Functions
 ```
 
-Cada función incluye documentación en formato PSDoc.
+Each function includes PSDoc format documentation.
 
 ---
 
-## 💡 Mejoras Implementadas
+## Implemented Improvements
 
-✅ Organización en secciones temáticas  
-✅ Documentación PSDoc para cada función  
-✅ Validación de rutas con `Test-Path`  
-✅ Mensajes de error claros y consistentes  
-✅ Retroalimentación visual mejorada  
-✅ Soporte para parámetros opcionales  
-✅ Exportación explícita de funciones  
-✅ Manejo de errores robusto  
-
----
-
-## 🤝 Contribuciones
-
-Si encuentras bugs o tienes sugerencias de mejora, siéntete libre de crear un PR o issue.
+Organized sections  
+PSDoc documentation for each function  
+Path validation with `Test-Path`  
+Clear and consistent error messages  
+Improved visual feedback  
+Support for optional parameters  
+Explicit function export  
+Robust error handling  
 
 ---
 
-## 📄 Licencia
+## Contributions
 
-Estos scripts están disponibles bajo licencia MIT. Úsalos libremente en tus proyectos.
+If you find bugs or have improvement suggestions, feel free to create a PR or issue.
 
 ---
 
-## 🔗 Referencias
+## License
 
-- [Documentación de Dotnet CLI](https://docs.microsoft.com/es-es/dotnet/core/tools/)
-- [ASP.NET Core Environment](https://docs.microsoft.com/es-es/aspnet/core/fundamentals/environments)
+These scripts are available under MIT license. Use them freely in your projects.
+
+---
+
+## References
+
+- [Dotnet CLI Documentation](https://docs.microsoft.com/dotnet/core/tools/)
+- [ASP.NET Core Environment](https://docs.microsoft.com/aspnet/core/fundamentals/environments)
 - [Docker CLI Reference](https://docs.docker.com/engine/reference/commandline/cli/)
-- [PowerShell Documentation](https://docs.microsoft.com/es-es/powershell/)
+- [PowerShell Documentation](https://docs.microsoft.com/powershell/)

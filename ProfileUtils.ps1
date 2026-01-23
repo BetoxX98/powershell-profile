@@ -1,28 +1,28 @@
 <#
 .SYNOPSIS
-    PowerShell Profile Utilities - Utilidades para desarrollo .NET, Docker y más.
+    PowerShell Profile Utilities - Utilities for .NET, Docker and more development.
 
 .DESCRIPTION
-    Conjunto de funciones para acelerar tareas comunes en desarrollo.
-    Incluye utilidades para dotnet, ASP.NET Core, Yarn y Docker.
+    Set of functions to accelerate common development tasks.
+    Includes utilities for dotnet, ASP.NET Core, Yarn and Docker.
 
 .AUTHOR
-    Tu Nombre
+    Your Name
 
 .VERSION
     1.0.0
 #>
 
 # ========================================
-# DOTNET - Funciones de ayuda
+# DOTNET - Help functions
 # ========================================
 
 <#
 .SYNOPSIS
-    Muestra ayuda con los comandos disponibles de .NET.
+    Display help with available .NET commands.
 
 .DESCRIPTION
-    Imprime una lista formatada de todos los comandos disponibles con su descripción y parámetros opcionales.
+    Prints a formatted list of all available commands with their description and optional parameters.
 
 .EXAMPLE
     dn-help
@@ -32,16 +32,16 @@ function dn-help {
 
     $commands = @(
         @{ Name = "dnrs";     Desc = "dotnet restore"; Params = $null },
-        @{ Name = "dnb";      Desc = "dotnet build"; Params = "[ProjectPath] opcional -> dnb ./src/MyProj" },
+        @{ Name = "dnb";      Desc = "dotnet build"; Params = "[ProjectPath] optional -> dnb ./src/MyProj" },
         @{ Name = "dnc";      Desc = "dotnet clean"; Params = $null },
-        @{ Name = "dnc+";     Desc = "Eliminar carpetas bin/obj recursivamente"; Params = $null },
-        @{ Name = "dnr";      Desc = "dotnet run"; Params = "[ProjectPath] opcional -> dnr ./src/MyProj" },
+        @{ Name = "dnc+";     Desc = "Delete bin/obj folders recursively"; Params = $null },
+        @{ Name = "dnr";      Desc = "dotnet run"; Params = "[ProjectPath] optional -> dnr ./src/MyProj" },
         @{ Name = "dnt";      Desc = "dotnet test"; Params = $null },
-        @{ Name = "dn-updt";  Desc = "Listar paquetes NuGet desactualizados"; Params = "[ProjectPath] opcional -> dn-updates ./MiProyecto" },
-        @{ Name = "dnv";      Desc = "Mostrar version de .NET"; Params = $null },
-        @{ Name = "dn-purge"; Desc = "Terminar procesos dotnet activos"; Params = $null },
-        @{ Name = "dnf";      Desc = "Formatear código con CSharpier"; Params = $null },
-        @{ Name = "dn-help";  Desc = "Mostrar esta ayuda"; Params = $null }
+        @{ Name = "dn-updt";  Desc = "List outdated NuGet packages"; Params = "[ProjectPath] optional -> dn-updates ./MyProject" },
+        @{ Name = "dnv";      Desc = "Show .NET version"; Params = $null },
+        @{ Name = "dn-purge"; Desc = "Kill active dotnet processes"; Params = $null },
+        @{ Name = "dnf";      Desc = "Format code with CSharpier"; Params = $null },
+        @{ Name = "dn-help";  Desc = "Show this help"; Params = $null }
     )
 
     foreach ($cmd in $commands) {
@@ -55,18 +55,18 @@ function dn-help {
 }
 
 # ========================================
-# DOTNET - Build y Clean
+# DOTNET - Build and Clean
 # ========================================
 
 <#
 .SYNOPSIS
-    Compila un proyecto o solución .NET.
+    Compiles a .NET project or solution.
 
 .DESCRIPTION
-    Ejecuta 'dotnet build' con validación y feedback visual de éxito/error.
+    Executes 'dotnet build' with validation and visual feedback of success/error.
 
 .PARAMETER ProjectPath
-    Ruta del proyecto a compilar. Por defecto es el directorio actual.
+    Path of the project to compile. Default is the current directory.
 
 .EXAMPLE
     dnb
@@ -78,7 +78,7 @@ function dnb {
     )
     
     if (-not (Test-Path $ProjectPath)) {
-        Write-Host "Error: La ruta no existe: $ProjectPath" -ForegroundColor Red
+        Write-Host "Error: Path does not exist: $ProjectPath" -ForegroundColor Red
         return
     }
     
@@ -99,10 +99,10 @@ function dnb {
 
 <#
 .SYNOPSIS
-    Limpia los artifacts de construcción.
+    Cleans build artifacts.
 
 .DESCRIPTION
-    Ejecuta 'dotnet clean' en el proyecto actual.
+    Executes 'dotnet clean' in the current project.
 
 .EXAMPLE
     dnc
@@ -113,11 +113,11 @@ function dnc {
 
 <#
 .SYNOPSIS
-    Elimina recursivamente carpetas bin y obj.
+    Recursively deletes bin and obj folders.
 
 .DESCRIPTION
-    Busca y elimina todas las carpetas bin y obj en el árbol de directorios actual.
-    Útil para limpiar proyectos profundamente.
+    Searches and deletes all bin and obj folders in the current directory tree.
+    Useful for deeply cleaning projects.
 
 .EXAMPLE
     dnc+
@@ -131,18 +131,18 @@ function dnc+ {
 }
 
 # ========================================
-# DOTNET - Ejecutar y Testear
+# DOTNET - Run and Test
 # ========================================
 
 <#
 .SYNOPSIS
-    Ejecuta un proyecto .NET.
+    Runs a .NET project.
 
 .DESCRIPTION
-    Ejecuta 'dotnet run' en el proyecto especificado o en el actual.
+    Executes 'dotnet run' in the specified project or the current one.
 
 .PARAMETER ProjectPath
-    Ruta del proyecto a ejecutar. Por defecto es el directorio actual.
+    Path of the project to run. Default is the current directory.
 
 .EXAMPLE
     dnr
@@ -154,7 +154,7 @@ function dnr {
     )
     
     if (-not (Test-Path $ProjectPath)) {
-        Write-Host "Error: La ruta no existe: $ProjectPath" -ForegroundColor Red
+        Write-Host "Error: Path does not exist: $ProjectPath" -ForegroundColor Red
         return
     }
     
@@ -163,10 +163,10 @@ function dnr {
 
 <#
 .SYNOPSIS
-    Ejecuta los tests de un proyecto.
+    Runs project tests.
 
 .DESCRIPTION
-    Ejecuta 'dotnet test' en el proyecto actual.
+    Executes 'dotnet test' in the current project.
 
 .EXAMPLE
     dnt
@@ -177,10 +177,10 @@ function dnt {
 
 <#
 .SYNOPSIS
-    Restaura las dependencias NuGet.
+    Restores NuGet dependencies.
 
 .DESCRIPTION
-    Ejecuta 'dotnet restore' en el proyecto actual.
+    Executes 'dotnet restore' in the current project.
 
 .EXAMPLE
     dnrs
@@ -190,15 +190,15 @@ function dnrs {
 }
 
 # ========================================
-# DOTNET - Información y Gestión
+# DOTNET - Information and Management
 # ========================================
 
 <#
 .SYNOPSIS
-    Muestra la versión de .NET instalada.
+    Shows the installed .NET version.
 
 .DESCRIPTION
-    Ejecuta 'dotnet --version' para mostrar la versión del SDK instalado.
+    Executes 'dotnet --version' to display the installed SDK version.
 
 .EXAMPLE
     dnv
@@ -209,11 +209,11 @@ function dnv {
 
 <#
 .SYNOPSIS
-    Termina todos los procesos dotnet activos.
+    Kills all active dotnet processes.
 
 .DESCRIPTION
-    Encuentra y termina todos los procesos de dotnet en ejecución.
-    Útil para liberar recursos cuando hay procesos atrapados.
+    Finds and terminates all running dotnet processes.
+    Useful for freeing resources when processes are stuck.
 
 .EXAMPLE
     dn-purge
@@ -225,22 +225,22 @@ function dn-purge {
             Write-Host "Stopping .NET process: $($_.Id) ($($_.Path))" -ForegroundColor Yellow
             Stop-Process -Id $_.Id -Force
         }
-        Write-Host "Procesos .NET terminados." -ForegroundColor Green
+        Write-Host ".NET processes terminated." -ForegroundColor Green
     }
     else {
-        Write-Host "No se encontraron procesos .NET en ejecución." -ForegroundColor Cyan
+        Write-Host "No running .NET processes found." -ForegroundColor Cyan
     }
 }
 
 <#
 .SYNOPSIS
-    Lista los paquetes NuGet desactualizados.
+    Lists outdated NuGet packages.
 
 .DESCRIPTION
-    Muestra un listado de paquetes NuGet que tienen versiones más nuevas disponibles.
+    Shows a list of NuGet packages that have newer versions available.
 
 .PARAMETER ProjectPath
-    Ruta del proyecto a analizar. Por defecto es el directorio actual.
+    Path of the project to analyze. Default is the current directory.
 
 .EXAMPLE
     dn-updt
@@ -256,11 +256,11 @@ function dn-updt {
     }
 
     if (-not (Test-Path $ProjectPath)) {
-        Write-Host "Error: La ruta especificada no existe: $ProjectPath" -ForegroundColor Red
+        Write-Host "Error: Specified path does not exist: $ProjectPath" -ForegroundColor Red
         return
     }
 
-    Write-Host "Buscando paquetes desactualizados en: $ProjectPath" -ForegroundColor Cyan
+    Write-Host "Searching for outdated packages in: $ProjectPath" -ForegroundColor Cyan
     Write-Host ""
 
     dotnet list $ProjectPath package --outdated
@@ -268,10 +268,10 @@ function dn-updt {
 
 <#
 .SYNOPSIS
-    Formatea el código C# con CSharpier.
+    Formats C# code with CSharpier.
 
 .DESCRIPTION
-    Ejecuta CSharpier para formatear automáticamente todo el código C# en el proyecto actual.
+    Executes CSharpier to automatically format all C# code in the current project.
 
 .EXAMPLE
     dnf
@@ -281,16 +281,16 @@ function dnf {
 }
 
 # ========================================
-# ASP.NET CORE - Configuración de Ambiente
+# ASP.NET CORE - Environment Configuration
 # ========================================
 
 <#
 .SYNOPSIS
-    Establece el ambiente a Desarrollo.
+    Sets environment to Development.
 
 .DESCRIPTION
-    Configura la variable de entorno ASPNETCORE_ENVIRONMENT a 'Development'.
-    Se establece tanto en la sesión actual como de manera persistente.
+    Configures the ASPNETCORE_ENVIRONMENT environment variable to 'Development'.
+    Sets it both in the current session and persistently.
 
 .EXAMPLE
     asp-set-devEnv
@@ -298,16 +298,16 @@ function dnf {
 function asp-set-devEnv {
     setx ASPNETCORE_ENVIRONMENT "Development"
     $env:ASPNETCORE_ENVIRONMENT = 'Development'
-    Write-Host "ASPNETCORE_ENVIRONMENT configurado a: Development" -ForegroundColor Green
+    Write-Host "ASPNETCORE_ENVIRONMENT set to: Development" -ForegroundColor Green
 }
 
 <#
 .SYNOPSIS
-    Establece el ambiente a Producción.
+    Sets environment to Production.
 
 .DESCRIPTION
-    Configura la variable de entorno ASPNETCORE_ENVIRONMENT a 'Production'.
-    Se establece tanto en la sesión actual como de manera persistente.
+    Configures the ASPNETCORE_ENVIRONMENT environment variable to 'Production'.
+    Sets it both in the current session and persistently.
 
 .EXAMPLE
     asp-set-prodEnv
@@ -315,19 +315,19 @@ function asp-set-devEnv {
 function asp-set-prodEnv {
     setx ASPNETCORE_ENVIRONMENT "Production"
     $env:ASPNETCORE_ENVIRONMENT = 'Production'
-    Write-Host "ASPNETCORE_ENVIRONMENT configurado a: Production" -ForegroundColor Green
+    Write-Host "ASPNETCORE_ENVIRONMENT set to: Production" -ForegroundColor Green
 }
 
 # ========================================
-# YARN - Gestión de dependencias JavaScript
+# YARN - JavaScript dependency management
 # ========================================
 
 <#
 .SYNOPSIS
-    Inicializa e inicia un proyecto Yarn.
+    Initializes and starts a Yarn project.
 
 .DESCRIPTION
-    Ejecuta 'yarn' para instalar dependencias y luego 'yarn start' para iniciar el proyecto.
+    Executes 'yarn' to install dependencies and then 'yarn start' to start the project.
 
 .EXAMPLE
     pws-isyarn
@@ -338,19 +338,19 @@ function pws-isyarn {
 }
 
 # ========================================
-# DOCKER - Gestión de contenedores
+# DOCKER - Container management
 # ========================================
 
 <#
 .SYNOPSIS
-    Purga todos los recursos de Docker.
+    Purges all Docker resources.
 
 .DESCRIPTION
-    Detiene y elimina todos los contenedores, volúmenes e imágenes de Docker.
-    Opcional: mantener imágenes con el switch -KeepImages.
+    Stops and removes all Docker containers, volumes and images.
+    Optional: keep images with the -KeepImages switch.
 
 .PARAMETER KeepImages
-    Si se especifica, las imágenes de Docker no se eliminarán.
+    If specified, Docker images will not be removed.
 
 .EXAMPLE
     docker-purge
@@ -359,19 +359,19 @@ function pws-isyarn {
 function docker-purge {
     param([switch]$KeepImages)
 
-    Write-Host "Deteniendo contenedores de Docker..." -ForegroundColor Cyan
+    Write-Host "Stopping Docker containers..." -ForegroundColor Cyan
     docker container stop $(docker container ls -aq) | Out-Null
     
-    Write-Host "Eliminando contenedores..." -ForegroundColor Cyan
+    Write-Host "Removing containers..." -ForegroundColor Cyan
     docker container rm $(docker container ls -aq) -f | Out-Null
     
-    Write-Host "Eliminando volúmenes..." -ForegroundColor Cyan
+    Write-Host "Removing volumes..." -ForegroundColor Cyan
     docker volume rm $(docker volume ls -q) -f | Out-Null
     
     if (-not $KeepImages) {
-        Write-Host "Eliminando imágenes..." -ForegroundColor Cyan
+        Write-Host "Removing images..." -ForegroundColor Cyan
         docker image rm $(docker image ls -aq) -f | Out-Null
     }
     
-    Write-Host "Purge completado." -ForegroundColor Green
+    Write-Host "Purge completed." -ForegroundColor Green
 }
