@@ -375,25 +375,3 @@ function docker-purge {
     
     Write-Host "Purge completado." -ForegroundColor Green
 }
-
-# ========================================
-# EXPORTAR FUNCIONES
-# ========================================
-
-Export-ModuleMember -Function @(
-    'dn-help',
-    'dnb',
-    'dnc',
-    'dnc+',
-    'dnr',
-    'dnt',
-    'dnrs',
-    'dnv',
-    'dn-purge',
-    'dn-updt',
-    'dnf',
-    'asp-set-devEnv',
-    'asp-set-prodEnv',
-    'pws-isyarn',
-    'docker-purge'
-)
