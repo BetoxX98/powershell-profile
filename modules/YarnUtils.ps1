@@ -17,7 +17,7 @@ function yarn-help {
     Write-Host "`nYARN helper commands:`n" -ForegroundColor Cyan
 
     $commands = @(
-        @{ Name = "pws-isyarn"; Desc = "yarn install + yarn start"; Params = $null },
+        @{ Name = "yarn-is"; Desc = "yarn install + yarn start"; Params = $null },
         @{ Name = "yarn-help";  Desc = "Show this help"; Params = $null }
     )
 
@@ -35,7 +35,7 @@ function yarn-help {
 # YARN - JavaScript dependency management
 # ========================================
 
-function pws-isyarn {
+function yarn-is {
     yarn
     yarn start
 }

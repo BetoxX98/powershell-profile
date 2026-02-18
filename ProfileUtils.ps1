@@ -29,8 +29,8 @@ if ($PSScriptRoot) {
 
 Remove-Variable _modules, _baseUrl -ErrorAction SilentlyContinue
 
-function dn-help {
-    $helpers = @('pws-help', 'dn-help-dotnet', 'asp-help', 'docker-help', 'yarn-help')
+function profile-help {
+    $helpers = @('pws-help', 'dn-help', 'asp-help', 'docker-help', 'yarn-help')
     foreach ($helper in $helpers) {
         if (Get-Command $helper -ErrorAction SilentlyContinue) {
             & $helper

@@ -14,7 +14,7 @@
 # DOTNET - Help
 # ========================================
 
-function dn-help-dotnet {
+function dn-help {
     Write-Host "`nDOTNET helper commands:`n" -ForegroundColor Cyan
 
     $commands = @(
@@ -28,7 +28,7 @@ function dn-help-dotnet {
         @{ Name = "dnv";           Desc = "Show .NET version"; Params = $null },
         @{ Name = "dn-purge";      Desc = "Kill active dotnet processes"; Params = $null },
         @{ Name = "dnf";           Desc = "Format code with CSharpier"; Params = $null },
-        @{ Name = "dn-help-dotnet"; Desc = "Show this help"; Params = $null }
+        @{ Name = "dn-help";        Desc = "Show this help"; Params = $null }
     )
 
     foreach ($cmd in $commands) {
