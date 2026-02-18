@@ -1,280 +1,138 @@
 # PowerShell Profile - Development Utilities
 
-PowerShell function set to speed up common development tasks with **.NET, Docker, Yarn and more**. Optimized for Windows PowerShell 5.1+.
+PowerShell utility modules to speed up common development tasks with **.NET, ASP.NET Core, Docker, Yarn and more**.
 
-## Table of Contents
+## File Structure
 
-- [Installation](#installation)
-- [.NET Commands](#net-commands)
-- [ASP.NET Core Commands](#aspnet-core-commands)
-- [Docker Commands](#docker-commands)
-- [JavaScript/Yarn Commands](#javascriptyarn-commands)
-- [Quick Usage](#quick-usage)
-- [Troubleshooting](#troubleshooting)
-
----
+```
+powershell-profile/
+├── ProfileUtils.ps1          # Hub: loads all modules
+└── modules/
+    ├── PowerShellUtils.ps1   # Session utilities (c, open, terminal, pws-*)
+    ├── DotnetUtils.ps1       # .NET commands (dnb, dnr, dnt, dnc...)
+    ├── AspNetUtils.ps1       # ASP.NET Core environment
+    ├── DockerUtils.ps1       # Docker container management
+    └── YarnUtils.ps1         # Yarn / JavaScript
+```
 
 ## Installation
 
-### Option 1: Auto-load in profile
-
-1. Open PowerShell as administrator
-2. Navigate to `Documents\PowerShell` (or create the folder if it does not exist)
-3. Copy `ProfileUtils.ps1` to that location
-4. Edit or create the `$PROFILE` file and add:
+Clone the repo and add to your `$PROFILE`:
 
 ```powershell
-# In $PROFILE
-. "$PSScriptRoot\ProfileUtils.ps1"
+. "C:\path\to\powershell-profile\ProfileUtils.ps1"
 ```
 
-5. Reload PowerShell or execute:
-```powershell
-. $PROFILE
-```
-
-### Option 2: Manual load
-
-```powershell
-. "C:\path\to\ProfileUtils.ps1"
-```
-
-### Verify installation
+To verify:
 
 ```powershell
 dn-help
 ```
 
+### Load only specific modules
+
+```powershell
+# Only .NET and Docker
+. "C:\path\to\powershell-profile\modules\DotnetUtils.ps1"
+. "C:\path\to\powershell-profile\modules\DockerUtils.ps1"
+```
+
 ---
 
-## .NET Commands
+## Commands
 
-All .NET utilities start with `dn` for quick access.
+### PowerShell — `PowerShellUtils.ps1`
 
-### Build and Clean
+| Command | Description |
+|---------|-------------|
+| `c` | Clear screen |
+| `open` | Open current directory in Explorer |
+| `terminal` | Open new Windows Terminal |
+| `terminal -claude` | Open Windows Terminal with Claude CLI |
+| `pws-p` | Edit `$PROFILE` in VSCode |
+| `pws-s` | Reload `$PROFILE` |
+| `pws-l` | List `pws-*` functions |
+| `pws-help` | Show this module's help |
+
+---
+
+### .NET — `DotnetUtils.ps1`
 
 | Command | Description | Example |
 |---------|-------------|---------|
-| `dnb` | Build (compile) | `dnb` or `dnb ./src/MyProject` |
-| `dnc` | Clean (clean artifacts) | `dnc` |
+| `dnb` | dotnet build | `dnb` or `dnb ./src/MyProject` |
+| `dnc` | dotnet clean | `dnc` |
 | `dnc+` | Delete bin/obj folders recursively | `dnc+` |
-
-**Example:**
-```powershell
-dnb ./src/MyProject    # Compiles specific project
-dnc+                   # Cleans all bin/obj folders
-```
-
-### Run and Test
-
-| Command | Description | Example |
-|---------|-------------|---------|
-| `dnr` | Run (execute) | `dnr` or `dnr ./src/MyProject` |
-| `dnt` | Test (run tests) | `dnt` |
-| `dnrs` | Restore (restore dependencies) | `dnrs` |
-
-**Example:**
-```powershell
-dnr ./src/Api          # Runs specific project
-dnt                    # Runs all tests
-```
-
-### Information and Management
-
-| Command | Description | Example |
-|---------|-------------|---------|
+| `dnr` | dotnet run | `dnr` or `dnr ./src/MyProject` |
+| `dnt` | dotnet test | `dnt` |
+| `dnrs` | dotnet restore | `dnrs` |
 | `dnv` | Show .NET version | `dnv` |
-| `dn-updt` | List outdated packages | `dn-updt` or `dn-updt ./src/Project` |
-| `dn-purge` | Kill dotnet processes | `dn-purge` |
+| `dn-updt` | List outdated NuGet packages | `dn-updt` or `dn-updt ./src` |
+| `dn-purge` | Kill active dotnet processes | `dn-purge` |
 | `dnf` | Format code with CSharpier | `dnf` |
-| `dn-help` | Show this help | `dn-help` |
-
-**Example:**
-```powershell
-dnv                    # Shows: .NET 8.0.100
-dn-updt ./src          # Lists outdated packages
-dn-purge               # Kills stuck processes
-dnf                    # Formats all code
-```
+| `dn-help-dotnet` | Show this module's help | `dn-help-dotnet` |
 
 ---
 
-## ASP.NET Core Commands
-
-Manage the execution environment for ASP.NET Core projects.
+### ASP.NET Core — `AspNetUtils.ps1`
 
 | Command | Description |
 |---------|-------------|
-| `asp-set-devEnv` | Sets `ASPNETCORE_ENVIRONMENT = Development` |
-| `asp-set-prodEnv` | Sets `ASPNETCORE_ENVIRONMENT = Production` |
-
-**Example:**
-```powershell
-asp-set-devEnv        # Development environment (enables hot reload, etc)
-asp-set-prodEnv       # Production environment
-```
+| `asp-set-devEnv` | Set `ASPNETCORE_ENVIRONMENT = Development` |
+| `asp-set-prodEnv` | Set `ASPNETCORE_ENVIRONMENT = Production` |
+| `asp-help` | Show this module's help |
 
 ---
 
-## Docker Commands
-
-Control and management of Docker containers.
-
-### docker-purge
-
-Cleans all Docker resources.
-
-```powershell
-docker-purge           # Removes everything (containers, volumes, images)
-docker-purge -KeepImages   # Removes everything EXCEPT images
-```
-
-**Warning:** This command removes ALL containers and volumes. Use carefully in production.
-
----
-
-## JavaScript/Yarn Commands
+### Docker — `DockerUtils.ps1`
 
 | Command | Description |
 |---------|-------------|
-| `pws-isyarn` | Installs dependencies and runs `yarn start` |
+| `docker-purge` | Stop and remove all containers, volumes and images |
+| `docker-purge -KeepImages` | Same but keeps images |
+| `docker-help` | Show this module's help |
 
-**Example:**
-```powershell
-pws-isyarn            # yarn install + yarn start
-```
+> **Warning:** `docker-purge` removes all local Docker resources. Use with care.
 
 ---
 
-## Quick Usage
+### Yarn — `YarnUtils.ps1`
 
-### Typical development flow
+| Command | Description |
+|---------|-------------|
+| `pws-isyarn` | `yarn install` + `yarn start` |
+| `yarn-help` | Show this module's help |
 
-```powershell
-# 1. Clean and build
-dnc+
-dnb
+---
 
-# 2. Check for outdated packages
-dn-updt
-
-# 3. Run tests
-dnt
-
-# 4. Format code
-dnf
-
-# 5. Run the application
-dnr
-```
-
-### Debug workflow
+## Help
 
 ```powershell
-# Dotnet processes get stuck
-dn-purge               # Cleans all processes
-
-# Rebuild and run
-dnb && dnr
-```
-
-### Environment management
-
-```powershell
-# Switch to development
-asp-set-devEnv
-dnr
-
-# Switch to production
-asp-set-prodEnv
-dnb -c Release
+dn-help          # Show all modules' help at once
+dn-help-dotnet   # .NET only
+asp-help         # ASP.NET Core only
+docker-help      # Docker only
+yarn-help        # Yarn only
+pws-help         # PowerShell only
 ```
 
 ---
 
 ## Troubleshooting
 
-### Functions are not available
+**Functions not available**
+1. Confirm `ProfileUtils.ps1` is dot-sourced in `$PROFILE`
+2. Reload: `. $PROFILE`
+3. Check: `Get-Command dn-help`
 
-**Problem:** `dn-help is not recognized`
+**`dotnet` not found**
+Install the .NET SDK: https://dotnet.microsoft.com/download
 
-**Solution:**
-1. Verify that `ProfileUtils.ps1` is in `Documents\PowerShell`
-2. Confirm that the file is loaded in `$PROFILE`
-3. Execute: `. $PROFILE`
-4. Check: `Get-Command dn-help`
+**`docker-purge` permission error**
+Run PowerShell as administrator and make sure Docker Desktop is running.
 
-### Dotnet commands do not work
-
-**Problem:** `dotnet: command not found`
-
-**Solution:**
-1. Install .NET SDK from https://dotnet.microsoft.com/download
-2. Restart PowerShell
-3. Verify: `dnv`
-
-### Docker-purge gives permission error
-
-**Problem:** `Error response from daemon: permission denied`
-
-**Solution:**
-1. Run PowerShell as administrator
-2. Make sure Docker Desktop is running
-3. Try again: `docker-purge`
-
-### CSharpier not available
-
-**Problem:** `dnf` gives error
-
-**Solution:**
-1. Install CSharpier: `dotnet tool install -g csharpier`
-2. Try again: `dnf`
-
----
-
-## File Structure
-
-The file is organized in clear sections:
-
-```
-ProfileUtils.ps1
-├── Import External Utilities
-├── DOTNET - Help functions
-├── DOTNET - Build and Clean
-├── DOTNET - Run and Test
-├── DOTNET - Information and Management
-├── ASP.NET CORE - Environment Configuration
-├── YARN - JavaScript dependency management
-├── DOCKER - Container management
-└── Export Functions
-```
-
-Each function includes PSDoc format documentation.
-
----
-
-## Implemented Improvements
-
-Organized sections  
-PSDoc documentation for each function  
-Path validation with `Test-Path`  
-Clear and consistent error messages  
-Improved visual feedback  
-Support for optional parameters  
-Explicit function export  
-Robust error handling  
-
----
-
-## Contributions
-
-If you find bugs or have improvement suggestions, feel free to create a PR or issue.
-
----
-
-## License
-
-These scripts are available under MIT license. Use them freely in your projects.
+**`dnf` not working**
+Install CSharpier: `dotnet tool install -g csharpier`
 
 ---
 
