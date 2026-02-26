@@ -13,7 +13,8 @@ $_modules = @(
     'DotnetUtils',
     'AspNetUtils',
     'DockerUtils',
-    'YarnUtils'
+    'YarnUtils',
+    'GitUtils'
 )
 
 if ($PSScriptRoot) {
@@ -30,7 +31,7 @@ if ($PSScriptRoot) {
 Remove-Variable _modules, _baseUrl -ErrorAction SilentlyContinue
 
 function profile-help {
-    $helpers = @('pws-help', 'dn-help', 'asp-help', 'docker-help', 'yarn-help')
+    $helpers = @('pws-help', 'dn-help', 'asp-help', 'docker-help', 'yarn-help', 'git-help')
     foreach ($helper in $helpers) {
         if (Get-Command $helper -ErrorAction SilentlyContinue) {
             & $helper

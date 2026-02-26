@@ -1,6 +1,6 @@
 # PowerShell Profile - Development Utilities
 
-PowerShell utility modules to speed up common development tasks with **.NET, ASP.NET Core, Docker, Yarn and more**.
+PowerShell utility modules to speed up common development tasks with **.NET, ASP.NET Core, Docker, Yarn, Git and more**.
 
 ## File Structure
 
@@ -12,7 +12,8 @@ powershell-profile/
     ├── DotnetUtils.ps1       # .NET commands (dnb, dnr, dnt, dnc...)
     ├── AspNetUtils.ps1       # ASP.NET Core environment
     ├── DockerUtils.ps1       # Docker container management
-    └── YarnUtils.ps1         # Yarn / JavaScript
+    ├── YarnUtils.ps1         # Yarn / JavaScript
+    └── GitUtils.ps1          # Git branch inspection and cleanup
 ```
 
 ## Installation
@@ -100,20 +101,44 @@ dn-help
 
 | Command | Description |
 |---------|-------------|
-| `pws-isyarn` | `yarn install` + `yarn start` |
+| `yarn-is` | `yarn install` + `yarn start` |
 | `yarn-help` | Show this module's help |
+
+---
+
+### Git — `GitUtils.ps1`
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `git-branches` | List all local branches with owner, location and divergence vs base | `git-branches` or `git-branches -base develop` |
+| `git-branches -fetch` | Same but fetches from remote first | `git-branches -fetch` |
+| `git-clean` | Delete local-only merged branches owned by you (with confirmation) | `git-clean` or `git-clean -base develop` |
+| `git-clean -fetch` | Same but fetches from remote first | `git-clean -fetch` |
+| `git-help` | Show this module's help | `git-help` |
+
+**`git-branches` output columns:**
+
+| Column | Values |
+|--------|--------|
+| Branch | Branch name (`*` marks current) |
+| Owner | Author of tip commit |
+| Status | `remote`, `local only`, with optional `(current)` suffix |
+| vs base | `(base)`, `up to date`, `+N` ahead, `-N` behind, `+N / -N` diverged |
+
+> **Note:** `git-clean` only deletes branches that are **fully merged** into the base, **not present on remote**, and whose tip commit **belongs to you** (`git config user.name`). It asks for confirmation before deleting. If your current branch is a candidate, it will checkout the base branch first.
 
 ---
 
 ## Help
 
 ```powershell
-dn-help          # Show all modules' help at once
-dn-help-dotnet   # .NET only
-asp-help         # ASP.NET Core only
-docker-help      # Docker only
-yarn-help        # Yarn only
-pws-help         # PowerShell only
+profile-help   # Show all modules' help at once
+pws-help       # PowerShell only
+dn-help        # .NET only
+asp-help       # ASP.NET Core only
+docker-help    # Docker only
+yarn-help      # Yarn only
+git-help       # Git only
 ```
 
 ---
@@ -133,6 +158,15 @@ Run PowerShell as administrator and make sure Docker Desktop is running.
 
 **`dnf` not working**
 Install CSharpier: `dotnet tool install -g csharpier`
+
+**`git-branches` / `git-clean` show wrong remote status**
+Remote-tracking refs may be stale. Run with `-fetch` to update them: `git-branches -fetch`
+
+**`git-clean` reports "git user.name is not configured"**
+Set your git identity: `git config --global user.name "Your Name"`
+
+**`git-clean` finds no candidates despite having merged branches**
+The author of the branch tip must match your `git config user.name` exactly. Check with: `git config user.name`
 
 ---
 
